@@ -33,7 +33,7 @@
             <div class="card-image">
               <img src="uploads/Mac-Electric-Featured-Image-Template-5.png">
               <span class="card-title" >
-                <button class="btn waves-effect waves-light" type="submit" name="action">Product Page</button>
+                <button class="btn waves-effect waves-light" type="submit" onclick="openModal()" name="action">Product Page</button>
                 <button class="btn waves-effect waves-light" type="submit" name="action">Marketing Page</button>
               </span>
               
@@ -50,6 +50,20 @@
 
     <!-- <button>Get External Content</button>  -->
 
+<div id="simpleModal" class="modal">
+  <div class="modal-content">
+    <h4>Product List</h4>
+    <ul class="product-list">
+      <li>Product 1</li>
+      <li>Product 2</li>
+      <li>Product 3</li>
+    </ul>
+  </div>
+  <div class="modal-footer">
+    <button class="modal-close btn waves-effect waves-light" onclick="closeModal()">Close</button>
+  </div>
+</div>
+    
 </body>
 <script src="js/materialize.min.js" ></script>
 
