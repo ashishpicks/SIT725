@@ -1,34 +1,64 @@
 const express= require("express");
+var bodyParser=require("body-parser");
+var mongoose=require("mongoose");
+
+const path=require("path");
+
     const app= express();
-    app.use(express.static('public'))
+    app.use(bodyParser.json());
+    app.use(express.static('public'));
+    app.use(bodyParser.urlencoded({
+        extended:true
+    }))
 
-     const addTwoNumber= (n1,n2) => {
-     return n1+n2;
-    }
-    
+    mongoose.connect('mongodb://localhost:27017/Database')
+    var db=mongoose.connection
+    db.on('error',()=>console.log("Error in connecting to db"))
+    db.once('open',()=>console.log("Connected to db"))
 
-    app.get("/addTwoNumber", (req,res)=>{
-    const n1= parseInt(req.query.n1);
-    const n2=parseInt(req.query.n2);
-    const result = addTwoNumber(n1,n2);
-    res.json({statuscocde:200, data: result }); 
-    });
 
-    app.get("/Display", (req, res) => {
-    const n1 = "<html><body><H1>HELLO THERE </H1></body></html>";
-    res.set('Content-Type', 'text/html');
-    res.send(Buffer.from(n1));     
-     })
+    /* inserting signup information to db*/
+    app.post("/sign_up",(req,res)=>{
+        var firstname=req.body.firstname
+        var lastname=req.body.lastname
+        var age=req.body.age
+        var email=req.body.email
+        var phno=req.body.phno
+        var gender=req.body.gender
+        var password=req.body.password
 
-     app.get("/newPage", (req, res) => {
-        const filePath = path.join(__dirname, 'public/newpage.html');
-    
-        // Send the HTML file as the response
-        res.sendFile(filePath);     
-         })
-         
-     
-    console.log (addTwoNumber(19,12));
+        var data={
+            "firstname":firstname,
+            "lastname":lastname,
+            "age":age,
+            "email":email,
+            "phno":phno,
+            "gender":gender,
+            "pasword":password
+
+        }
+        db.collection('users').insertOne(data,(err,collection)=>{
+            if(err){
+                throw err;
+            }
+            console.log("Record inserted successfully")
+        })
+        return res.redirect('dashboard.html');
+    })
+
+
+
+    app.get("/signUp",(req,res)=>{
+        const filepath=path.join(__dirname,"public", "signUp.html");
+        res.sendFile(filepath);
+    })
+    app.get("/login",(req,res)=>{
+        const filepath=path.join(__dirname,"public", "login.html");
+        res.sendFile(filepath);
+    })
+
+
+
     const port=3040;
     app.listen(port,()=> {
         console.log("hello i'm listening to port "+port);

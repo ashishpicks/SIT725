@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  
+</head>
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- <link type="text/css" href="css/materialize.min.css" rel="stylesheet"> -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+
+<body>
+
+  
+  <div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="card" style="width: 38rem; top: 40px;">
+      <img src="uploads/SignUp-Logo.png" class="card-img-top" alt="...">
+      <div class="card-body">
+        <div class="container">
+          
+            <form class="row g-3" action="/sign_up" method="post">
+              <div class="col-md-6">
+                <label for="validationDefault01" class="form-label">First name</label>
+                <input type="text" class="form-control" name="firstname" id="firstname"  required>
+              </div>
+              <div class="col-md-6">
+                <label for="validationDefault02" class="form-label">Last name</label>
+                <input type="text" class="form-control" name="lastname" id="lastname" required>
+              </div>
+              <div class="row">
+              <div class="col-md-9">
+                <label for="validationDefaultUsername" class="form-label">Email</label>
+                <div class="input-group">
+                  <span class="input-group-text" id="email">@</span>
+                  <input type="text" class="form-control" id="email" name="email"  aria-describedby="inputGroupPrepend2" required>
+                </div>
+              </div>
+            </div>
+              <div class="col-md-6">
+                <label for="validationDefault03" class="form-label">Mobile Number</label>
+                <input type="text" class="form-control" id="phno" name="phno" required>
+              </div>
+              <div class="col-md-4">
+                <label for="validationDefault04" class="form-label">Gender</label>
+                <select class="form-select" id="gender" name="gender" required>
+                  <option selected disabled value="">Choose Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Others">Others</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <label for="validationDefault05" class="form-label">Age</label>
+                <input type="text" class="form-control" name="age" id="age" required>
+              </div>
+              <div class="row">
+              <div class="col-md-6">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" class="form-control" name="password" id="password" required>
+              </div>
+            </div>
+              <div class="col-12">
+                <button class="btn btn-success" type="submit" value="submit" id="submit">Submit form</button>
+              </div>
+            </form>
+         
+        </div>
+      
+      </div>
+    </div>
+  </div>
+
+
+
+</body>
+<!-- <script src="js/materialize.min.js" ></script> -->
+
+<script src="js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+
+</html>
