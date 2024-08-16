@@ -7,6 +7,8 @@ const bcrypt = require('bcrypt');
 const path=require("path");
 const session=require("express-session");
 
+
+
 const app= express();
 
 // Configure session
@@ -15,7 +17,7 @@ app.use(
         secret: "##11!!@@", // Strong secret key
         resave: false,
         saveUninitialized: true,
-        cookie: { secure: false }, // Set to true if using HTTPS
+        cookie: { secure: false }, // When using HTTPS set True
     })
 );
 
@@ -109,11 +111,6 @@ app.post("/login", async (req, res) => {
         return res.status(401).send("Invalid email or password");
       }
   
-      // Check if the password matches
-      /* if (user.password !== password) {
-        console.log("Invalid password");
-        return res.status(401).send("Invalid email or password2");
-      }  */
         const isMatch = await bcrypt.compare(password, user.password);
 
         if (!isMatch) {
@@ -165,20 +162,20 @@ app.get("/logout", (req, res) => {
     })
 
     // Protect dashboard route with authentication middleware
-    app.get("/dashboard", isAuthenticated, (req, res) => {
+    /* app.get("/dashboard", isAuthenticated, (req, res) => {
         const filepath = path.join(__dirname, "private", "dashboard.html");
         res.sendFile(filepath);
-    })
+    }) */
+
+    // Protect dashboard route with authentication middleware
+    app.get("/dashboard", isAuthenticated, (req, res) => {
+      const filepath = path.join(__dirname, "private", "dashboard.html");
+      res.sendFile(filepath);
+  })
 
 
 
-
-
-
-
-
-
-
+/* server running port code */
     const port=3040;
     app.listen(port,()=> {
         console.log("hello i'm listening to port "+port);
