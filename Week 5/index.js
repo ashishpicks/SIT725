@@ -2,7 +2,7 @@ const express= require("express");
 var bodyParser=require("body-parser");
 var mongoose=require("mongoose");
 const bcrypt = require('bcrypt');
-
+const res = require("express/lib/response");
 
 const path=require("path");
 const session=require("express-session");
@@ -184,7 +184,15 @@ app.get("/logout", (req, res) => {
       res.sendFile(filepath);
   }) */
 
-
+      app.get('/addTwoNumbers/:firstNumber/:secondNumber', function(req,res,next){
+        var firstNumber = parseInt(req.params.firstNumber) 
+        var secondNumber = parseInt(req.params.secondNumber)
+        var result = firstNumber + secondNumber || null
+        if(result == null) {
+          res.json({result: result, statusCode: 400}).status(400)
+        }
+        else { res.json({result: result, statusCode: 200}).status(200) } 
+      })
 
 /* server running port code */
     const port=3040;

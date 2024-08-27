@@ -4,14 +4,17 @@
   "description": "",
   "main": "server_get.js",
   "scripts": {
+    "test": "mocha",
     "start": "node server_get.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
+    "chai": "^5.1.1",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
     "express-session": "^1.18.0",
+    "mocha": "^10.7.3",
     "mongoose": "^8.5.2",
     "nodemon": "^3.1.4"
   }
