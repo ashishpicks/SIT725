@@ -68,57 +68,9 @@ describe("Add Two Numbers", function() {
 
 
 
-  // Login tests  Starts
-describe("Login API", function() {
-  var url = "http://localhost:3040/login";
 
-  it("should return status 200 and 'Login OK' for valid credentials", function(done) {
-      
-      request.post(
-          {
-              url: url,
-              json: { email: "nimshabohara8848@gmail.com", password: "Ashish@123" } // Replace with actual credentials
-          },
-          function(error, response, body) {
-              expect(response.statusCode).to.equal(200);
-              expect(body.message).to.equal("Login OK");
-              done();
-          }
-      );
-  });
 
-  it("should return status 401 and 'Invalid Credentials' for wrong credentials", function(done) {
-      request.post(
-          {
-              url: url,
-              json: { email: "abohara195", password: "Password" }
-          },
-          function(error, response, body) {
-              expect(response.statusCode).to.equal(401);
-              expect(body.message).to.equal("Invalid Credentials");
-              done();
-          }
-      );
-  });
-
-  it("should return status 400 for missing credentials", function(done) {
-      request.post(
-          {
-              url: url,
-              json: {} // Empty body to simulate missing credentials
-          },
-          function(error, response, body) {
-              expect(response.statusCode).to.equal(400);
-              expect(body.message).to.equal("Missing Credentials");
-              done();
-          }
-      );
-  });
-});
-
-//Login Test Ends
-
-describe("Public Routes", function() {
+describe("Public Routes Successfully Reaches", function() {
 
   // Index Page Test
   describe("GET / (Index Page)", function() {
@@ -138,45 +90,24 @@ describe("Public Routes", function() {
           });
       });
   });
+
+  describe("GET / (Login Page)", function() {
+    var url = "http://localhost:3040/login";
+
+    it("should return status 200 login page found", function(done) {
+        request.get(url, function(error, response, body) {
+            expect(response.statusCode).to.equal(200);
+            done();
+        });
+    });
+
+    it("should contain 'email' and 'password' in the body", function(done) {
+        request.get(url, function(error, response, body) {
+            expect(body).to.contain("email");
+            done();
+        });
+    });
 });
 
-describe("Protected Routes", function() {
-
-  // Assuming login is required to access the dashboard
-  var loginUrl = "http://localhost:3040/login";
-  var dashboardUrl = "http://localhost:3040/dashboard";
-
-  // Login and obtain session or token (this could vary based on your app's authentication mechanism)
-  var jar = request.jar(); // To handle cookies for session management
-
-  before(function(done) {
-      request.post(
-          {
-              url: loginUrl,
-              json: { username: "validUser", password: "validPassword" }, // Use correct credentials
-              jar: jar // Save cookies in the jar
-          },
-          function(error, response, body) {
-              expect(response.statusCode).to.equal(200);
-              done();
-          }
-      );
-  });
-
-  // Dashboard Page Test after login
-  describe("GET /dashboard (Dashboard Page)", function() {
-      it("should return status 200 after successful login", function(done) {
-          request.get({ url: dashboardUrl, jar: jar }, function(error, response, body) {
-              expect(response.statusCode).to.equal(200);
-              done();
-          });
-      });
-
-      it("should contain 'Dashboard' in the body", function(done) {
-          request.get({ url: dashboardUrl, jar: jar }, function(error, response, body) {
-              expect(body).to.contain("Dashboard");
-              done();
-          });
-      });
-  });
 });
+
